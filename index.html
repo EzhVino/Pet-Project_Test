@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <title>Random Advertisement</title>
+</head>
+
+<body>
+    <div class="ad">
+        <header class="header">
+
+        </header>
+
+        <main class="content">
+
+        </main>
+        <footer class="contacts">
+
+        </footer>
+    </div>
+    <button class="refresh-btn">Показать другую</button>
+
+
+    <script src="data.js"></script>
+    <script>
+        const adEl = document.querySelector('.ad');
+
+        function arrayRandEl(arr) {
+            const rand = Math.floor(Math.random() * arr.length);
+            return arr[rand];
+        }
+
+        function fillContent(element) {
+            const headerEl = document.querySelector('.header');
+            headerEl.textContent = element.name;
+
+            const contentEl = document.querySelector('.content');
+            const importantNote = document.createElement('p');
+            importantNote.style.fontStyle = "italic";
+            importantNote.textContent = element.descImportant;
+            contentEl.textContent = `${element.description} `;
+
+            const contactsEl = document.querySelector('.contacts');
+            contactsEl.textContent = `котнакт: ${element.contactNumber}`;
+
+            adEl.appendChild(headerEl);
+            adEl.appendChild(contentEl);
+            contentEl.appendChild(importantNote);
+            adEl.appendChild(contactsEl);
+        }
+
+        let data = arrayRandEl(dataAdvertisement);
+        fillContent(data);
+
+        const refreshBtn = document.querySelector('.refresh-btn');
+        refreshBtn.addEventListener('click', () =>
+            fillContent(arrayRandEl(dataAdvertisement))
+        )
+    </script>
+</body>
+
+</html>
